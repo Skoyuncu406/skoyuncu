@@ -318,29 +318,21 @@ export default function HomeClient() {
           </motion.span>
 
           <div className="mt-5">
-            {t.services.map((item, index) => (
-              <motion.div
-                key={item[0]}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true, amount: 0.35 }}
-                transition={{
-                  duration: 1.2,
-                  delay: index * 0.12,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                className="group border-t border-[#17130F]/10 py-12 transition-all duration-700 last:border-b md:hover:border-[#C9A86A]"
-              >
-                <div className="grid gap-6 md:grid-cols-[120px_1fr_1fr] md:items-start">
-                  <span className="text-sm text-[#8B5E1E]">{item[0]}</span>
-                  <h3 className="heading-font text-4xl transition-all duration-700 md:group-hover:translate-x-4 md:group-hover:text-[#8B5E1E]">
-                    {item[1]}
-                  </h3>
-                  <p className="text-lg leading-8 text-[#5F554B]">{item[2]}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+  {t.services.map((item) => (
+    <div
+      key={item[0]}
+      className="group border-t border-[#17130F]/10 py-12 transition-all duration-700 last:border-b md:hover:border-[#C9A86A]"
+    >
+      <div className="grid gap-6 md:grid-cols-[120px_1fr_1fr] md:items-start">
+        <span className="text-sm text-[#8B5E1E]">{item[0]}</span>
+        <h3 className="heading-font text-4xl transition-all duration-700 md:group-hover:translate-x-4 md:group-hover:text-[#8B5E1E]">
+          {item[1]}
+        </h3>
+        <p className="text-lg leading-8 text-[#5F554B]">{item[2]}</p>
+      </div>
+    </div>
+  ))}
+</div>
         </div>
       </section>
 
@@ -356,46 +348,38 @@ export default function HomeClient() {
             {t.projectsTitle}
           </h2>
 
-          <div className="mt-20 space-y-8">
-            {t.projects.map((project, index) => (
-              <motion.a
-                key={project.title}
-                href={project.site}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{
-                  duration: 1.2,
-                  delay: index * 0.12,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                className="group relative block overflow-hidden rounded-[2rem] border border-[#17130F]/10 bg-white/35 p-8 backdrop-blur-md transition-all duration-700 md:hover:-translate-y-2 md:hover:border-[#C9A86A]/50 md:hover:bg-white/55"
-              >
-                <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-[#C9A86A]/20 blur-3xl transition duration-700 group-hover:bg-[#C9A86A]/35" />
+         <div className="mt-20 space-y-8">
+  {t.projects.map((project) => (
+    <a
+      key={project.title}
+      href={project.site}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group relative block overflow-hidden rounded-[2rem] border border-[#17130F]/10 bg-white/35 p-8 backdrop-blur-md transition-all duration-700 md:hover:-translate-y-2 md:hover:border-[#C9A86A]/50 md:hover:bg-white/55"
+    >
+      <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-[#C9A86A]/20 blur-3xl transition duration-700 md:group-hover:bg-[#C9A86A]/35" />
 
-                <div className="relative grid gap-8 md:grid-cols-[1fr_1.5fr_auto] md:items-center">
-                  <span className="text-sm uppercase tracking-[0.3em] text-[#8B5E1E]">
-                    {project.type}
-                  </span>
+      <div className="relative grid gap-8 md:grid-cols-[1fr_1.5fr_auto] md:items-center">
+        <span className="text-sm uppercase tracking-[0.3em] text-[#8B5E1E]">
+          {project.type}
+        </span>
 
-                  <div>
-                    <h3 className="heading-font text-4xl md:text-5xl">
-                      {project.title}
-                    </h3>
-                    <p className="mt-4 max-w-2xl leading-8 text-[#5F554B]">
-                      {project.desc}
-                    </p>
-                  </div>
+        <div>
+          <h3 className="heading-font text-4xl md:text-5xl">
+            {project.title}
+          </h3>
+          <p className="mt-4 max-w-2xl leading-8 text-[#5F554B]">
+            {project.desc}
+          </p>
+        </div>
 
-                  <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#17130F] text-white transition duration-700 md:group-hover:bg-[#8B5E1E]">
-                    <ArrowRight size={20} />
-                  </span>
-                </div>
-              </motion.a>
-            ))}
-          </div>
+        <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#17130F] text-white transition duration-700 md:group-hover:bg-[#8B5E1E]">
+          <ArrowRight size={20} />
+        </span>
+      </div>
+    </a>
+  ))}
+</div>
         </div>
       </motion.section>
 
