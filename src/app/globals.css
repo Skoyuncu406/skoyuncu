@@ -1,26 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap");
+
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f4ede3;
+  --foreground: #17130f;
+
+  --font-heading: "Playfair Display", serif;
+  --font-body: "Manrope", sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+}
+
+.heading-font {
+  font-family: var(--font-heading);
+}
+
+.body-font {
+  font-family: var(--font-body);
+}
+
+.gold-gradient {
+  background: linear-gradient(
+    135deg,
+    #8b5e1e 0%,
+    #c9a86a 50%,
+    #f3d49c 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.section-label {
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #8b5e1e;
+}
+
+.premium-shadow {
+  box-shadow: 0 20px 60px rgba(23, 19, 15, 0.08);
 }
