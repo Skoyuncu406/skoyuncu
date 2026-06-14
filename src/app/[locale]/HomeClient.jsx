@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar";
 import ScrollButtons from "./components/ScrollButtons";
 import CursorGlow from "./components/CursorGlow";
 import FloatingContact from "./components/FloatingContact";
+import PageLoader from "./components/PageLoader";
 
 const smoothTransition = {
   duration: 1.45,
@@ -14,10 +15,13 @@ const smoothTransition = {
 };
 
 const sectionAnimation = {
-  initial: { opacity: 0, y: 90 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, amount: 0.18 },
-  transition: smoothTransition,
+  initial: { opacity: 0 },
+  whileInView: { opacity: 1 },
+  viewport: { once: true, amount: 0.12 },
+  transition: {
+    duration: 1.1,
+    ease: [0.22, 1, 0.36, 1],
+  },
 };
 
 const content = {
@@ -66,35 +70,34 @@ const content = {
     projects: [
       {
         title: "E-Ticaret Platformu",
-        site:"https://e-ticaret-livid-five.vercel.app/",
+        site: "https://e-ticaret-livid-five.vercel.app/",
         type: "Web Development",
         desc: "Ürün, sepet, sipariş ve admin yönetimi olan satış odaklı dijital platform.",
       },
       {
         title: "Premium Kurumsal Site",
-        site:"https://premiuminsaat.vercel.app/tr",
+        site: "https://premiuminsaat.vercel.app/tr",
         type: "Corporate Website",
         desc: "Çok dilli, güçlü marka algısı oluşturan modern kurumsal web sitesi.",
       },
-            {
+      {
         title: "Ürün Tanıtım Sitesi",
-        site:"https://hediyelik.vercel.app/",
+        site: "https://hediyelik.vercel.app/",
         type: "Product Website",
         desc: "Ürün odaklı, etkileyici görsellerle desteklenen tanıtım sitesi.",
       },
-                  {
-        title: "Premium Kişisel Website ",
-        site:"https://hukuk-nine.vercel.app/",
+      {
+        title: "Premium Kişisel Website",
+        site: "https://hukuk-nine.vercel.app/",
         type: "Portfolio / Personal Brand",
         desc: "Kişisel marka, hizmet tanıtımı ve iletişim odaklı profesyonel web çözümü.",
       },
       {
         title: "Uzman Portföy Sitesi",
-        site:"https://psikolog-pw3b.vercel.app/",
+        site: "https://psikolog-pw3b.vercel.app/",
         type: "Portfolio / Product Brand",
         desc: "Kişisel marka, hizmet tanıtımı ve iletişim odaklı profesyonel web çözümü.",
       },
-
     ],
 
     processLabel: "Çalışma Sürecim",
@@ -153,31 +156,31 @@ const content = {
     projects: [
       {
         title: "E-Commerce Platform",
-        site:"https://e-ticaret-livid-five.vercel.app/",
+        site: "https://e-ticaret-livid-five.vercel.app/",
         type: "Web Development",
         desc: "A sales-focused digital platform with product, cart, order and admin management.",
       },
       {
         title: "Premium Corporate Website",
-        site:"https://premiuminsaat.vercel.app/tr",
+        site: "https://premiuminsaat.vercel.app/tr",
         type: "Corporate Website",
         desc: "A multilingual modern corporate website that strengthens brand perception.",
       },
       {
         title: "Professional Portfolio Website",
-        site:"https://psikolog-pw3b.vercel.app/",
+        site: "https://psikolog-pw3b.vercel.app/",
         type: "Portfolio / Personal Brand",
         desc: "A professional web solution focused on personal branding, service presentation and contact.",
       },
-                  {
-        title: "Product Promotion website",
-        site:"https://hediyelik.vercel.app/",
+      {
+        title: "Product Promotion Website",
+        site: "https://hediyelik.vercel.app/",
         type: "Product Website",
         desc: "A product-focused website with compelling visuals and promotional content.",
       },
-                  {
-        title: "Premium Personal Website ",
-        site:"https://hukuk-nine.vercel.app/",
+      {
+        title: "Premium Personal Website",
+        site: "https://hukuk-nine.vercel.app/",
         type: "Portfolio / Personal Brand",
         desc: "A professional web solution focused on personal branding, service presentation and contact.",
       },
@@ -209,12 +212,13 @@ export default function HomeClient() {
 
   return (
     <main className="min-h-screen overflow-hidden bg-[#F4EDE3] text-[#17130F]">
+      <PageLoader />
       <Navbar />
       <CursorGlow />
       <FloatingContact />
       <ScrollButtons />
 
-      <section className="relative min-h-screen overflow-hidden px-6 py-10">
+      <section id="home" className="relative min-h-screen overflow-hidden px-6 py-10">
         <motion.div
           style={{
             backgroundImage: "url('/hero.png')",
@@ -246,7 +250,7 @@ export default function HomeClient() {
               {t.badge}
             </motion.div>
 
-            <h1 className="heading-font text-5xl leading-[1.10] tracking-tight md:text-7xl ">
+            <h1 className="heading-font text-5xl leading-[1.10] tracking-tight md:text-7xl">
               {t.heroTitle1}{" "}
               <span className="gold-gradient">{t.heroTitle2}</span>{" "}
               {t.heroTitle3}
@@ -317,19 +321,19 @@ export default function HomeClient() {
             {t.services.map((item, index) => (
               <motion.div
                 key={item[0]}
-                initial={{ opacity: 0, y: 80 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
                 viewport={{ once: true, amount: 0.35 }}
                 transition={{
                   duration: 1.2,
                   delay: index * 0.12,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="group border-t border-[#17130F]/10 py-12 transition-all duration-700 last:border-b hover:border-[#C9A86A]"
+                className="group border-t border-[#17130F]/10 py-12 transition-all duration-700 last:border-b md:hover:border-[#C9A86A]"
               >
                 <div className="grid gap-6 md:grid-cols-[120px_1fr_1fr] md:items-start">
                   <span className="text-sm text-[#8B5E1E]">{item[0]}</span>
-                  <h3 className="heading-font text-4xl transition-all duration-700 group-hover:translate-x-4 group-hover:text-[#8B5E1E]">
+                  <h3 className="heading-font text-4xl transition-all duration-700 md:group-hover:translate-x-4 md:group-hover:text-[#8B5E1E]">
                     {item[1]}
                   </h3>
                   <p className="text-lg leading-8 text-[#5F554B]">{item[2]}</p>
@@ -352,21 +356,22 @@ export default function HomeClient() {
             {t.projectsTitle}
           </h2>
 
-          <a  className="mt-20 space-y-8">
+          <div className="mt-20 space-y-8">
             {t.projects.map((project, index) => (
-              <motion.div
-              target="_blank"
+              <motion.a
                 key={project.title}
                 href={project.site}
-                initial={{ opacity: 0, y: 70 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{
                   duration: 1.2,
                   delay: index * 0.12,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="group relative overflow-hidden rounded-[2rem] border border-[#17130F]/10 bg-white/35 p-8 backdrop-blur-md transition-all duration-700 hover:-translate-y-2 hover:border-[#C9A86A]/50 hover:bg-white/55"
+                className="group relative block overflow-hidden rounded-[2rem] border border-[#17130F]/10 bg-white/35 p-8 backdrop-blur-md transition-all duration-700 md:hover:-translate-y-2 md:hover:border-[#C9A86A]/50 md:hover:bg-white/55"
               >
                 <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-[#C9A86A]/20 blur-3xl transition duration-700 group-hover:bg-[#C9A86A]/35" />
 
@@ -384,15 +389,13 @@ export default function HomeClient() {
                     </p>
                   </div>
 
-                  <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#17130F] text-white transition duration-700 group-hover:bg-[#8B5E1E]">
-                    <a target="_blank" href={project.site}>
-                      <ArrowRight size={20} />
-                    </a>
+                  <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#17130F] text-white transition duration-700 md:group-hover:bg-[#8B5E1E]">
+                    <ArrowRight size={20} />
                   </span>
                 </div>
-              </motion.div>
+              </motion.a>
             ))}
-          </a>
+          </div>
         </div>
       </motion.section>
 
@@ -414,10 +417,10 @@ export default function HomeClient() {
             {t.processSteps.map((step, index) => (
               <div
                 key={step}
-                className="group border-t border-white/15 pt-8 transition-all duration-700 hover:-translate-y-2 hover:border-[#C9A86A]"
+                className="group border-t border-white/15 pt-8 transition-all duration-700 md:hover:-translate-y-2 md:hover:border-[#C9A86A]"
               >
                 <span className="text-[#C9A86A]">0{index + 1}</span>
-                <h3 className="heading-font mt-4 text-3xl transition-all duration-700 group-hover:text-[#C9A86A]">
+                <h3 className="heading-font mt-4 text-3xl transition-all duration-700 md:group-hover:text-[#C9A86A]">
                   {step}
                 </h3>
               </div>
@@ -465,10 +468,7 @@ export default function HomeClient() {
               <path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.72c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.36 1.12 2.94.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05A9.3 9.3 0 0 1 12 7.01c.85 0 1.7.12 2.5.35 1.9-1.33 2.74-1.05 2.74-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.95.68 1.91v2.84c0 .27.18.6.69.49A10.25 10.25 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" />
             </SocialIcon>
 
-            <SocialIcon
-              href="#"
-              label="LinkedIn"
-            >
+            <SocialIcon href="#" label="LinkedIn">
               <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5ZM.4 8h4.2v13H.4V8Zm7.2 0h4v1.78h.06c.56-1.06 1.93-2.18 3.98-2.18 4.26 0 5.04 2.8 5.04 6.44V21h-4.2v-6.18c0-1.47-.03-3.36-2.05-3.36-2.05 0-2.36 1.6-2.36 3.25V21h-4.2V8Z" />
             </SocialIcon>
           </div>
