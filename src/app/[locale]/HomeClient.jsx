@@ -232,7 +232,7 @@ export default function HomeClient() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#F4EDE3]/85 via-[#F4EDE3]/45 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#F4EDE3] via-transparent to-transparent" />
 
-        <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl items-center">
+       <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl items-center pt-24 md:min-h-screen md:pt-0">
           <motion.div
             style={{ y: heroTextY, opacity: heroOpacity }}
             initial={{ opacity: 0, y: 55 }}

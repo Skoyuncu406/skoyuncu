@@ -46,7 +46,7 @@ export default function PageLoader() {
             </motion.h1>
 
             <p className="mt-3 max-w-xs text-center text-xs tracking-[0.35em] text-[#8B5E1E] sm:max-w-none sm:tracking-[0.45em]">
-              PROJECT MANAGEMENT • DEVELOPMENT
+              PROJECT MANAGEMENT • WEB DEVELOPMENT
             </p>
           </div>
         </motion.div>
