@@ -1,51 +1,39 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
 import { useParams } from "next/navigation";
 import { ArrowRight, Sparkle } from "lucide-react";
 import Navbar from "./components/Navbar";
+import PageLoader from "./components/PageLoader";
+import FloatingContact from "./components/FloatingContact";
 import ScrollButtons from "./components/ScrollButtons";
 import CursorGlow from "./components/CursorGlow";
-import FloatingContact from "./components/FloatingContact";
-import PageLoader from "./components/PageLoader";
-
-const smoothTransition = {
-  duration: 1.45,
-  ease: [0.22, 1, 0.36, 1],
-};
-
-const sectionAnimation = {
-  initial: { opacity: 0 },
-  whileInView: { opacity: 1 },
-  viewport: { once: true, amount: 0.12 },
-  transition: {
-    duration: 1.1,
-    ease: [0.22, 1, 0.36, 1],
-  },
-};
 
 const content = {
   tr: {
-    badge: "Web Tasarım • Yazılım • Yapay Zeka Destekli Çözümler",
-    heroTitle1: "Dijital projeleri",
-    heroTitle2: "fikir aşamasından",
-    heroTitle3: "yayına kadar yönetiyorum.",
+    badge: "Proje Yönetimi • Web Geliştirme • Dijital Çözümler",
+    heroPanelTitle: "PM + DEV",
+    heroMetrics: [
+      ["40+", "Proje Deneyimi"],
+      ["Uçtan Uca", "Proje Yönetimi"],
+      ["SEO + UX", "Performans Odaklı"],
+    ],
+    heroTitle: "Dijital projeleri fikir aşamasından yayına kadar yönetiyorum.",
     heroDesc:
-      "Web siteleri, özel yazılımlar ve dijital ürünler için strateji, proje yönetimi ve geliştirme süreçlerini uçtan uca yönetiyorum.",
+      "İş hedeflerini doğru analiz ederek web siteleri, özel yazılımlar ve dijital ürünler için uçtan uca çözüm geliştiriyorum.",
     projectsBtn: "Projelerimi İncele",
-    contactBtn: "Benimle Çalışın",
+    contactBtn: "İletişime Geç",
 
     aboutLabel: "Hakkımda",
     aboutTitle: "Teknik bilgi ile iş hedefleri arasında köprü kuruyorum.",
     aboutDesc:
-      "Benim odağım sadece web sitesi geliştirmek değil; fikri doğru analiz etmek, süreci planlamak, kullanıcı deneyimini düşünmek ve projeyi yayına hazır bir ürüne dönüştürmek.",
+      "Benim odağım sadece web sitesi yapmak değil; fikri analiz etmek, süreci planlamak, kullanıcı deneyimini düşünmek ve projeyi yayına hazır hale getirmek.",
 
     servicesLabel: "Hizmetler",
     services: [
       [
         "01",
         "Proje Yönetimi",
-        "Keşif, kapsam, zaman planı, önceliklendirme ve yayın sürecini kontrollü şekilde yönetirim.",
+        "Keşif, kapsam, zaman planı ve teslim süreçlerini yönetirim.",
       ],
       [
         "02",
@@ -55,83 +43,138 @@ const content = {
       [
         "03",
         "Yapay Zeka & Otomasyon",
-        "İş süreçlerini hızlandıran yapay zeka destekli çözümler ve otomasyonlar tasarlarım.",
+        "İş süreçlerini hızlandıran yapay zeka destekli çözümler tasarlarım.",
       ],
       [
         "04",
         "Dijital Danışmanlık",
-        "Markaların dijitalde doğru konumlanması için teknik ve stratejik yol haritası oluştururum.",
+        "Markalar için teknik ve stratejik yol haritası oluştururum.",
       ],
     ],
 
     projectsLabel: "Projeler",
-    projectsTitle:
-      "Sadece tasarım değil, problemden sonuca giden dijital çözümler.",
+    projectsTitle: "Problemden sonuca giden dijital çözümler.",
+    view: "İncele",
+    problem: "Problem",
+    solution: "Çözüm",
+    result: "Sonuç",
+
     projects: [
       {
         title: "E-Ticaret Platformu",
-        site: "https://e-ticaret-livid-five.vercel.app/",
+        site: "https://professional-e-commerce.vercel.app/",
         type: "Web Development",
-        desc: "Ürün, sepet, sipariş ve admin yönetimi olan satış odaklı dijital platform.",
+        problem:
+          "Ürün, sepet ve sipariş süreçlerinin yönetilebilir olması gerekiyordu.",
+        solution:
+          "Admin paneli, ürün yönetimi ve sipariş takibi olan bir yapı geliştirildi.",
+        result:
+          "Satış odaklı, yönetilebilir ve ölçeklenebilir bir altyapı ortaya çıktı.",
       },
       {
         title: "Premium Kurumsal Site",
         site: "https://premiuminsaat.vercel.app/tr",
         type: "Corporate Website",
-        desc: "Çok dilli, güçlü marka algısı oluşturan modern kurumsal web sitesi.",
+        problem:
+          "Markanın dijital görünümü kurumsal seviyeyi yeterince yansıtmıyordu.",
+        solution:
+          "Çok dilli, premium arayüze sahip kurumsal web deneyimi geliştirildi.",
+        result:
+          "Daha güven veren ve marka algısını güçlendiren bir platform oluşturuldu.",
       },
       {
         title: "Ürün Tanıtım Sitesi",
         site: "https://hediyelik.vercel.app/",
         type: "Product Website",
-        desc: "Ürün odaklı, etkileyici görsellerle desteklenen tanıtım sitesi.",
+        problem:
+          "Ürünlerin dijitalde estetik ve anlaşılır şekilde sunulması gerekiyordu.",
+        solution:
+          "Kategori ve ürün odaklı modern bir tanıtım yapısı oluşturuldu.",
+        result:
+          "Ürünleri öne çıkaran sade ve etkileyici bir web deneyimi sağlandı.",
       },
       {
         title: "Premium Kişisel Website",
         site: "https://hukuk-nine.vercel.app/",
-        type: "Portfolio / Personal Brand",
-        desc: "Kişisel marka, hizmet tanıtımı ve iletişim odaklı profesyonel web çözümü.",
+        type: "Personal Brand",
+        problem:
+          "Kişisel marka algısını güçlendirecek profesyonel bir dijital vitrin gerekiyordu.",
+        solution:
+          "Hizmet, uzmanlık ve iletişim odaklı premium kişisel web sitesi geliştirildi.",
+        result:
+          "Güven veren ve profesyonel bir kişisel marka deneyimi oluşturuldu.",
       },
       {
         title: "Uzman Portföy Sitesi",
         site: "https://psikolog-pw3b.vercel.app/",
-        type: "Portfolio / Product Brand",
-        desc: "Kişisel marka, hizmet tanıtımı ve iletişim odaklı profesyonel web çözümü.",
+        type: "Portfolio Website",
+        problem:
+          "Danışanların bilgiye, hizmetlere ve iletişime kolay ulaşması gerekiyordu.",
+        solution:
+          "Hizmet, blog, iletişim ve randevu odaklı modern bir yapı tasarlandı.",
+        result:
+          "Uzmanlık algısını güçlendiren ve iletişimi kolaylaştıran bir platform ortaya çıktı.",
       },
     ],
 
-    processLabel: "Çalışma Sürecim",
+    processLabel: "Süreç",
     processTitle: "Her başarılı proje, doğru yönetilen bir süreçle başlar.",
-    processSteps: ["Keşif", "Planlama", "Geliştirme", "Test", "Yayınlama", "Destek"],
+    process: ["Keşif", "Planlama", "Geliştirme", "Test", "Yayınlama", "Destek"],
 
-    contactTitle:
-      "Bir fikriniz varsa, onu birlikte güçlü bir dijital projeye dönüştürelim.",
-    contactButton: "Benimle İletişime Geç",
+    contactLabel: "İletişim",
+    contactTitle: "Bir fikriniz mi var?",
+    contactDesc:
+      "Yeni bir proje, iş birliği veya dijital dönüşüm süreci hakkında konuşmak isterseniz mesajınızı iletin. En kısa sürede sizinle iletişime geçeceğim.",
+    contactCardTitle: "Neler konusunda yardımcı olabilirim?",
+    contactServices: [
+      "Web sitesi ve yazılım projeleri",
+      "Proje yönetimi danışmanlığı",
+      "Yapay zeka ve otomasyon çözümleri",
+      "Dijital ürün geliştirme süreçleri",
+      "Teknik analiz ve yol haritası oluşturma",
+    ],
 
-    footerDesc: "Proje Yönetimi • Web Geliştirme • Dijital Çözümler",
+    formName: "Ad Soyad",
+    formEmail: "E-posta",
+    formSubject: "Konu",
+    formMessage: "Mesajınız",
+    formNamePlaceholder: "Adınız ve soyadınız",
+    formEmailPlaceholder: "ornek@mail.com",
+    formSubjectPlaceholder: "Projeniz hakkında kısa bilgi",
+    formMessagePlaceholder: "Mesajınızı buraya yazın...",
+    sendButton: "Mesajı Gönder",
+
+    phone: "0544 203 06 62",
+    mail: "selcuk_kyncu_06@hotmail.com",
+    whatsapp: "WhatsApp",
+    footer: "Proje Yönetimi • Web Geliştirme • Dijital Çözümler",
   },
 
   en: {
-    badge: "Web Design • Software • AI-Powered Solutions",
-    heroTitle1: "Managing digital projects",
-    heroTitle2: "from idea",
-    heroTitle3: "to launch.",
+    badge: "Project Management • Web Development • Digital Solutions",
+    heroPanelTitle: "PM + DEV",
+    heroMetrics: [
+      ["40+", "Project Experience"],
+      ["End-to-End", "Project Management"],
+      ["SEO + UX", "Performance Focus"],
+    ],
+    heroTitle: "I manage digital projects from idea to launch.",
     heroDesc:
-      "I manage strategy, project management and development processes end-to-end for websites, custom software and digital products.",
+      "I analyze business goals and build end-to-end digital solutions for websites, custom software and digital products.",
     projectsBtn: "View Projects",
-    contactBtn: "Work With Me",
+    contactBtn: "Contact Me",
 
     aboutLabel: "About",
     aboutTitle: "I bridge technical knowledge with business goals.",
     aboutDesc:
-      "My focus is not only building websites; I analyze ideas, plan the process, design the user experience and turn projects into launch-ready digital products.",
+      "My focus is not only building websites; I analyze ideas, plan the process, design the user experience and turn projects into launch-ready products.",
 
     servicesLabel: "Services",
     services: [
       [
         "01",
         "Project Management",
-        "I manage discovery, scope, timelines, prioritization and launch processes in a controlled way.",
+        "I manage discovery, scope, timelines and delivery processes.",
       ],
       [
         "02",
@@ -141,339 +184,407 @@ const content = {
       [
         "03",
         "AI & Automation",
-        "I design AI-powered solutions and automations that accelerate business processes.",
+        "I design AI-powered solutions that accelerate business processes.",
       ],
       [
         "04",
         "Digital Consulting",
-        "I create technical and strategic roadmaps for brands to position themselves better digitally.",
+        "I create technical and strategic roadmaps for brands.",
       ],
     ],
 
     projectsLabel: "Projects",
-    projectsTitle:
-      "Not just design, but digital solutions from problem to result.",
+    projectsTitle: "Digital solutions from problem to result.",
+    view: "View",
+    problem: "Problem",
+    solution: "Solution",
+    result: "Result",
+
     projects: [
       {
         title: "E-Commerce Platform",
-        site: "https://e-ticaret-livid-five.vercel.app/",
+        site: "https://professional-e-commerce.vercel.app/",
         type: "Web Development",
-        desc: "A sales-focused digital platform with product, cart, order and admin management.",
+        problem: "Product, cart and order processes needed to be manageable.",
+        solution:
+          "An admin panel, product management and order tracking structure was developed.",
+        result:
+          "A scalable and sales-focused e-commerce infrastructure was created.",
       },
       {
         title: "Premium Corporate Website",
         site: "https://premiuminsaat.vercel.app/tr",
         type: "Corporate Website",
-        desc: "A multilingual modern corporate website that strengthens brand perception.",
-      },
-      {
-        title: "Professional Portfolio Website",
-        site: "https://psikolog-pw3b.vercel.app/",
-        type: "Portfolio / Personal Brand",
-        desc: "A professional web solution focused on personal branding, service presentation and contact.",
+        problem:
+          "The brand’s digital presence did not fully reflect its corporate level.",
+        solution:
+          "A multilingual corporate website with a premium interface was developed.",
+        result:
+          "A professional platform that strengthens brand perception was created.",
       },
       {
         title: "Product Promotion Website",
         site: "https://hediyelik.vercel.app/",
         type: "Product Website",
-        desc: "A product-focused website with compelling visuals and promotional content.",
+        problem:
+          "Products needed to be presented clearly and aesthetically online.",
+        solution:
+          "A modern promotional structure focused on categories and products was created.",
+        result:
+          "A simple and impressive product presentation experience was delivered.",
       },
       {
         title: "Premium Personal Website",
         site: "https://hukuk-nine.vercel.app/",
-        type: "Portfolio / Personal Brand",
-        desc: "A professional web solution focused on personal branding, service presentation and contact.",
+        type: "Personal Brand",
+        problem:
+          "A professional digital presence was needed to strengthen personal brand perception.",
+        solution:
+          "A premium website focused on services, expertise and communication was developed.",
+        result:
+          "A trustworthy and professional personal brand experience was created.",
+      },
+      {
+        title: "Professional Portfolio Website",
+        site: "https://psikolog-pw3b.vercel.app/",
+        type: "Portfolio Website",
+        problem:
+          "Visitors needed easy access to services, information and contact channels.",
+        solution:
+          "A modern structure focused on services, blog, contact and appointment flow was designed.",
+        result:
+          "A platform that strengthens expertise perception and simplifies communication was created.",
       },
     ],
 
     processLabel: "Process",
     processTitle: "Every successful project starts with a well-managed process.",
-    processSteps: ["Discovery", "Planning", "Development", "Testing", "Launch", "Support"],
+    process: ["Discovery", "Planning", "Development", "Testing", "Launch", "Support"],
 
-    contactTitle:
-      "If you have an idea, let’s turn it into a strong digital project together.",
-    contactButton: "Contact Me",
+    contactLabel: "Contact",
+    contactTitle: "Have an idea in mind?",
+    contactDesc:
+      "If you would like to discuss a new project, collaboration, or digital transformation process, send me a message and I will get back to you as soon as possible.",
+    contactCardTitle: "How can I help?",
+    contactServices: [
+      "Websites and software projects",
+      "Project management consulting",
+      "AI and automation solutions",
+      "Digital product development",
+      "Technical analysis and roadmap planning",
+    ],
 
-    footerDesc: "Project Management • Web Development • Digital Solutions",
+    formName: "Full Name",
+    formEmail: "Email",
+    formSubject: "Subject",
+    formMessage: "Message",
+    formNamePlaceholder: "Your full name",
+    formEmailPlaceholder: "example@email.com",
+    formSubjectPlaceholder: "Brief information about your project",
+    formMessagePlaceholder: "Write your message here...",
+    sendButton: "Send Message",
+
+    phone: "0544 203 06 62",
+    mail: "selcuk_kyncu_06@hotmail.com",
+    whatsapp: "WhatsApp",
+    footer: "Project Management • Web Development • Digital Solutions",
   },
 };
 
 export default function HomeClient() {
   const { locale } = useParams();
-  const isTr = locale === "tr";
-  const t = content[isTr ? "tr" : "en"];
-
-  const { scrollY } = useScroll();
-
-  const heroY = useTransform(scrollY, [0, 700], [0, 120]);
-  const heroScale = useTransform(scrollY, [0, 700], [1, 1.08]);
-  const heroTextY = useTransform(scrollY, [0, 700], [0, -70]);
-  const heroOpacity = useTransform(scrollY, [0, 500], [1, 0.35]);
+  const t = content[locale === "en" ? "en" : "tr"];
 
   return (
-    <main className="min-h-screen overflow-hidden bg-[#F4EDE3] text-[#17130F]">
+    <main className="min-h-screen bg-[#F8F8F6] text-[#0F172A]">
+      <CursorGlow />
       <PageLoader />
       <Navbar />
-      <CursorGlow />
       <FloatingContact />
       <ScrollButtons />
 
-      <section id="home" className="relative min-h-screen overflow-hidden px-6 py-10">
-        <motion.div
-          style={{
-            backgroundImage: "url('/hero.png')",
-            y: heroY,
-            scale: heroScale,
-          }}
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        />
+      <section
+        id="home"
+        className="relative overflow-hidden px-6 pb-24 pt-36 md:pt-40"
+      >
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#0F172A_1px,transparent_1px),linear-gradient(to_bottom,#0F172A_1px,transparent_1px)] bg-[size:56px_56px] opacity-[0.035]" />
 
-        <div className="absolute inset-0 bg-[#F4EDE3]/35" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#F4EDE3]/85 via-[#F4EDE3]/45 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#F4EDE3] via-transparent to-transparent" />
-
-       <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl items-center pt-24 md:min-h-screen md:pt-0">
-          <motion.div
-            style={{ y: heroTextY, opacity: heroOpacity }}
-            initial={{ opacity: 0, y: 55 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={smoothTransition}
-            className="max-w-3xl"
-          >
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ ...smoothTransition, delay: 0.3 }}
-              className="mb-7 inline-flex items-center gap-2 rounded-full border border-[#C9A86A]/40 bg-white/45 px-5 py-3 text-sm font-medium text-[#7A5A24] backdrop-blur-md"
-            >
+        <div className="relative mx-auto grid max-w-7xl gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+          <div>
+            <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-[#0F172A]/10 bg-white px-5 py-3 text-sm font-semibold text-[#C8A45D]">
               <Sparkle size={16} />
               {t.badge}
-            </motion.div>
+            </div>
 
-            <h1 className="heading-font text-5xl leading-[1.10] tracking-tight md:text-7xl">
-              {t.heroTitle1}{" "}
-              <span className="gold-gradient">{t.heroTitle2}</span>{" "}
-              {t.heroTitle3}
+            <h1 className="heading-font max-w-5xl text-5xl leading-[1.06] tracking-tight md:text-7xl">
+              {t.heroTitle}
             </h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 26 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ ...smoothTransition, delay: 0.6 }}
-              className="mt-8 max-w-2xl text-xl font-medium leading-9 text-[#51483F]"
-            >
+            <p className="mt-8 max-w-2xl text-lg leading-8 text-[#475569] md:text-xl">
               {t.heroDesc}
-            </motion.p>
+            </p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 26 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ ...smoothTransition, delay: 0.9 }}
-              className="mt-10 flex flex-col gap-4 sm:flex-row"
-            >
+            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <a
                 href="#projects"
-                className="group inline-flex items-center justify-center gap-3 rounded-full bg-[#17130F] px-8 py-4 font-medium text-white shadow-xl transition-all duration-700 hover:-translate-y-1 hover:bg-[#8B5E1E]"
+                className="inline-flex items-center justify-center gap-3 rounded-full bg-[#0F172A] px-8 py-4 font-semibold text-white transition hover:bg-[#C8A45D]"
               >
                 {t.projectsBtn}
-                <ArrowRight
-                  size={18}
-                  className="transition duration-700 group-hover:translate-x-1"
-                />
+                <ArrowRight size={18} />
               </a>
 
               <a
                 href="#contact"
-                className="inline-flex items-center justify-center rounded-full border border-[#17130F]/15 bg-white/55 px-8 py-4 font-medium text-[#17130F] backdrop-blur-md transition-all duration-700 hover:-translate-y-1 hover:bg-white"
+                className="inline-flex items-center justify-center rounded-full border border-[#0F172A]/15 bg-white px-8 py-4 font-semibold text-[#0F172A] transition hover:border-[#C8A45D] hover:text-[#C8A45D]"
               >
                 {t.contactBtn}
               </a>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
+
+          <div className="rounded-[2rem] border border-[#0F172A]/10 bg-white p-8 shadow-[0_30px_80px_rgba(15,23,42,0.08)]">
+            <span className="text-sm font-semibold uppercase tracking-[0.3em] text-[#C8A45D]">
+              {t.heroPanelTitle}
+            </span>
+
+            <div className="mt-8 grid gap-6">
+              {t.heroMetrics.map((metric) => (
+                <Metric key={metric[1]} title={metric[0]} text={metric[1]} />
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
-      <motion.section
-        id="about"
-        className="bg-[#F4EDE3] px-6 py-45"
-        {...sectionAnimation}
-      >
+      <section id="about" className="px-6 py-24">
         <div className="mx-auto max-w-7xl">
-          <span className="section-label">{t.aboutLabel}</span>
+          <SectionLabel>{t.aboutLabel}</SectionLabel>
 
-          <h2 className="heading-font mt-8 max-w-5xl text-4xl leading-tight md:text-7xl">
+          <h2 className="heading-font mt-8 max-w-5xl text-4xl leading-tight md:text-6xl">
             {t.aboutTitle}
           </h2>
 
-          <p className="mt-10 max-w-3xl text-xl leading-9 text-[#5F554B]">
+          <p className="mt-8 max-w-3xl text-lg leading-8 text-[#475569]">
             {t.aboutDesc}
           </p>
         </div>
-      </motion.section>
-
-      <section id="services" className="bg-[#EFE4D5] px-6 py-30">
-        <div className="mx-auto max-w-7xl">
-          <motion.span className="section-label" {...sectionAnimation}>
-            {t.servicesLabel}
-          </motion.span>
-
-          <div className="mt-5">
-  {t.services.map((item) => (
-    <div
-      key={item[0]}
-      className="group border-t border-[#17130F]/10 py-12 transition-all duration-700 last:border-b md:hover:border-[#C9A86A]"
-    >
-      <div className="grid gap-6 md:grid-cols-[120px_1fr_1fr] md:items-start">
-        <span className="text-sm text-[#8B5E1E]">{item[0]}</span>
-        <h3 className="heading-font text-4xl transition-all duration-700 md:group-hover:translate-x-4 md:group-hover:text-[#8B5E1E]">
-          {item[1]}
-        </h3>
-        <p className="text-lg leading-8 text-[#5F554B]">{item[2]}</p>
-      </div>
-    </div>
-  ))}
-</div>
-        </div>
       </section>
 
-      <motion.section
-        id="projects"
-        className="bg-[#F4EDE3] px-6 pt-25 pb-20"
-        {...sectionAnimation}
-      >
+      <section id="services" className="bg-white px-6 py-24">
         <div className="mx-auto max-w-7xl">
-          <span className="section-label">{t.projectsLabel}</span>
+          <SectionLabel>{t.servicesLabel}</SectionLabel>
 
-          <h2 className="heading-font mt-4 mb-8 max-w-5xl text-4xl leading-tight md:text-7xl">
-            {t.projectsTitle}
-          </h2>
-
-         <div className="mt-20 space-y-8">
-  {t.projects.map((project) => (
-    <a
-      key={project.title}
-      href={project.site}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group relative block overflow-hidden rounded-[2rem] border border-[#17130F]/10 bg-white/35 p-8 backdrop-blur-md transition-all duration-700 md:hover:-translate-y-2 md:hover:border-[#C9A86A]/50 md:hover:bg-white/55"
-    >
-      <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-[#C9A86A]/20 blur-3xl transition duration-700 md:group-hover:bg-[#C9A86A]/35" />
-
-      <div className="relative grid gap-8 md:grid-cols-[1fr_1.5fr_auto] md:items-center">
-        <span className="text-sm uppercase tracking-[0.3em] text-[#8B5E1E]">
-          {project.type}
-        </span>
-
-        <div>
-          <h3 className="heading-font text-4xl md:text-5xl">
-            {project.title}
-          </h3>
-          <p className="mt-4 max-w-2xl leading-8 text-[#5F554B]">
-            {project.desc}
-          </p>
-        </div>
-
-        <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#17130F] text-white transition duration-700 md:group-hover:bg-[#8B5E1E]">
-          <ArrowRight size={20} />
-        </span>
-      </div>
-    </a>
-  ))}
-</div>
-        </div>
-      </motion.section>
-
-      <motion.section
-        id="process"
-        className="bg-[#17130F] px-6 pt-25 pb-20 text-white"
-        {...sectionAnimation}
-      >
-        <div className="mx-auto max-w-7xl">
-          <span className="text-sm font-semibold uppercase tracking-[0.35em] text-[#C9A86A]">
-            {t.processLabel}
-          </span>
-
-          <h2 className="heading-font mt-8 max-w-5xl text-4xl leading-tight md:text-7xl">
-            {t.processTitle}
-          </h2>
-
-          <div className="mt-20 grid gap-10 md:grid-cols-3">
-            {t.processSteps.map((step, index) => (
+          <div className="mt-12 border-y border-[#0F172A]/10">
+            {t.services.map((item) => (
               <div
-                key={step}
-                className="group border-t border-white/15 pt-8 transition-all duration-700 md:hover:-translate-y-2 md:hover:border-[#C9A86A]"
+                key={item[0]}
+                className="grid gap-5 border-b border-[#0F172A]/10 py-9 last:border-b-0 md:grid-cols-[100px_1fr_1.2fr_auto] md:items-center"
               >
-                <span className="text-[#C9A86A]">0{index + 1}</span>
-                <h3 className="heading-font mt-4 text-3xl transition-all duration-700 md:group-hover:text-[#C9A86A]">
-                  {step}
+                <span className="font-semibold text-[#C8A45D]">{item[0]}</span>
+                <h3 className="heading-font text-3xl md:text-4xl">
+                  {item[1]}
                 </h3>
+                <p className="leading-8 text-[#475569]">{item[2]}</p>
+                <ArrowRight className="hidden text-[#C8A45D] md:block" size={22} />
               </div>
             ))}
           </div>
         </div>
-      </motion.section>
+      </section>
 
-      <motion.section
-        id="contact"
-        className="bg-[#F4EDE3] px-6 py-25"
-        {...sectionAnimation}
-      >
+      <section id="projects" className="px-6 py-24">
         <div className="mx-auto max-w-7xl">
-          <h2 className="heading-font max-w-5xl text-4xl leading-tight md:text-7xl">
-            {t.contactTitle}
+          <SectionLabel>{t.projectsLabel}</SectionLabel>
+
+          <h2 className="heading-font mt-8 max-w-5xl text-4xl leading-tight md:text-6xl">
+            {t.projectsTitle}
           </h2>
 
-          <a
-            href="mailto:selcuk_kyncu_06@hotmail.com"
-            className="mt-12 inline-flex rounded-full bg-[#17130F] px-8 py-4 font-medium text-white transition-all duration-700 hover:-translate-y-1 hover:bg-[#8B5E1E]"
-          >
-            {t.contactButton}
-          </a>
+          <div className="mt-14 space-y-10">
+            {t.projects.map((project) => (
+              <a
+                key={project.title}
+                href={project.site}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block border-t border-[#0F172A]/10 pt-10"
+              >
+                <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
+                  <div>
+                    <span className="text-sm font-semibold uppercase tracking-[0.25em] text-[#C8A45D]">
+                      {project.type}
+                    </span>
+
+                    <h3 className="heading-font mt-4 text-4xl leading-tight md:text-6xl">
+                      {project.title}
+                    </h3>
+
+                    <span className="mt-8 inline-flex items-center gap-2 rounded-full border border-[#0F172A]/10 bg-white px-5 py-3 text-sm font-semibold text-[#0F172A] transition group-hover:border-[#C8A45D] group-hover:text-[#C8A45D]">
+                      {t.view}
+                      <ArrowRight size={16} />
+                    </span>
+                  </div>
+
+                  <div className="grid gap-6 md:grid-cols-3">
+                    <CaseItem title={t.problem} text={project.problem} />
+                    <CaseItem title={t.solution} text={project.solution} />
+                    <CaseItem title={t.result} text={project.result} />
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
         </div>
-      </motion.section>
+      </section>
 
-      <footer className="border-t border-[#17130F]/10 bg-[#EFE4D5] px-6 py-12">
-        <div className="mx-auto flex max-w-7xl flex-col gap-8 md:flex-row md:items-center md:justify-between">
-          <div>
-            <h3 className="heading-font text-3xl">Selçuk Koyuncu</h3>
-            <p className="mt-2 text-[#5F554B]">{t.footerDesc}</p>
+      <section id="process" className="bg-[#0F172A] px-6 py-24 text-white">
+        <div className="mx-auto max-w-7xl">
+          <span className="text-sm font-semibold uppercase tracking-[0.35em] text-[#C8A45D]">
+            {t.processLabel}
+          </span>
+
+          <h2 className="heading-font mt-8 max-w-5xl text-4xl leading-tight md:text-6xl">
+            {t.processTitle}
+          </h2>
+
+          <div className="mt-16 grid gap-8 md:grid-cols-6">
+            {t.process.map((step, index) => (
+              <div key={step} className="border-t border-white/15 pt-6">
+                <span className="text-[#C8A45D]">0{index + 1}</span>
+                <h3 className="heading-font mt-4 text-2xl">{step}</h3>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" className="bg-white px-6 py-24 md:py-32">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-16 max-w-3xl">
+            <span className="text-sm font-semibold uppercase tracking-[0.35em] text-[#C8A45D]">
+              {t.contactLabel}
+            </span>
+
+            <h2 className="heading-font mt-6 text-4xl leading-tight text-[#0F172A] md:text-6xl">
+              {t.contactTitle}
+            </h2>
+
+            <p className="mt-6 text-lg leading-8 text-[#64748B]">
+              {t.contactDesc}
+            </p>
           </div>
 
-          <div className="flex gap-4">
-            <SocialIcon href="mailto:selcuk_kyncu_06@hotmail.com" label="E-posta">
-              <path d="M4 5h16c1.1 0 2 .9 2 2v10c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V7c0-1.1.9-2 2-2Zm8 8 8-5H4l8 5Zm0 2L4 10v7h16v-7l-8 5Z" />
-            </SocialIcon>
+          <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr]">
+            <div>
+              <div className="rounded-[2rem] border border-[#0F172A]/10 bg-[#F8F8F6] p-8">
+                <h3 className="heading-font text-3xl text-[#0F172A]">
+                  {t.contactCardTitle}
+                </h3>
 
-            <SocialIcon href="#" label="Web sitesi">
-              <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.93 9h-3.02a15.7 15.7 0 0 0-1.16-5.01A8.03 8.03 0 0 1 18.93 11ZM12 4.04c.83 1.2 1.53 3.37 1.78 6.96h-3.56C10.47 7.41 11.17 5.24 12 4.04ZM4.26 13h3.83c.12 1.95.44 3.75.92 5.14A8.02 8.02 0 0 1 4.26 13Zm3.83-2H4.26a8.02 8.02 0 0 1 4.75-5.14A18.7 18.7 0 0 0 8.09 11ZM12 19.96c-.83-1.2-1.53-3.37-1.78-6.96h3.56C13.53 16.59 12.83 18.76 12 19.96Zm3-1.82c.48-1.39.8-3.19.92-5.14h3.02A8.03 8.03 0 0 1 15 18.14Z" />
-            </SocialIcon>
+                <ul className="mt-8 space-y-5 text-[#475569]">
+                  {t.contactServices.map((item) => (
+                    <li key={item}>• {item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
 
-            <SocialIcon href="#" label="GitHub">
-              <path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.72c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.36 1.12 2.94.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05A9.3 9.3 0 0 1 12 7.01c.85 0 1.7.12 2.5.35 1.9-1.33 2.74-1.05 2.74-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.95.68 1.91v2.84c0 .27.18.6.69.49A10.25 10.25 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" />
-            </SocialIcon>
+            <form className="rounded-[2rem] border border-[#0F172A]/10 bg-white p-8 shadow-sm">
+              <div className="grid gap-6">
+                <div>
+                  <label className="mb-2 block text-sm font-medium text-[#0F172A]">
+                    {t.formName}
+                  </label>
 
-            <SocialIcon href="#" label="LinkedIn">
-              <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5ZM.4 8h4.2v13H.4V8Zm7.2 0h4v1.78h.06c.56-1.06 1.93-2.18 3.98-2.18 4.26 0 5.04 2.8 5.04 6.44V21h-4.2v-6.18c0-1.47-.03-3.36-2.05-3.36-2.05 0-2.36 1.6-2.36 3.25V21h-4.2V8Z" />
-            </SocialIcon>
+                  <input
+                    type="text"
+                    placeholder={t.formNamePlaceholder}
+                    className="w-full rounded-xl border border-[#0F172A]/10 px-4 py-4 outline-none transition focus:border-[#C8A45D]"
+                  />
+                </div>
+
+                <div>
+                  <label className="mb-2 block text-sm font-medium text-[#0F172A]">
+                    {t.formEmail}
+                  </label>
+
+                  <input
+                    type="email"
+                    placeholder={t.formEmailPlaceholder}
+                    className="w-full rounded-xl border border-[#0F172A]/10 px-4 py-4 outline-none transition focus:border-[#C8A45D]"
+                  />
+                </div>
+
+                <div>
+                  <label className="mb-2 block text-sm font-medium text-[#0F172A]">
+                    {t.formSubject}
+                  </label>
+
+                  <input
+                    type="text"
+                    placeholder={t.formSubjectPlaceholder}
+                    className="w-full rounded-xl border border-[#0F172A]/10 px-4 py-4 outline-none transition focus:border-[#C8A45D]"
+                  />
+                </div>
+
+                <div>
+                  <label className="mb-2 block text-sm font-medium text-[#0F172A]">
+                    {t.formMessage}
+                  </label>
+
+                  <textarea
+                    rows={6}
+                    placeholder={t.formMessagePlaceholder}
+                    className="w-full rounded-xl border border-[#0F172A]/10 px-4 py-4 outline-none transition focus:border-[#C8A45D]"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="rounded-full bg-[#0F172A] px-8 py-4 font-semibold text-white transition hover:bg-[#C8A45D]"
+                >
+                  {t.sendButton}
+                </button>
+              </div>
+            </form>
           </div>
+        </div>
+      </section>
+
+      <footer className="border-t border-[#0F172A]/10 bg-white px-6 py-12">
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <h3 className="heading-font text-3xl">Selçuk Koyuncu</h3>
+          <p className="text-[#475569]">{t.footer}</p>
         </div>
       </footer>
     </main>
   );
 }
 
-function SocialIcon({ href, label, children }) {
+function SectionLabel({ children }) {
   return (
-    <a
-      href={href}
-      aria-label={label}
-      target={href.startsWith("http") ? "_blank" : undefined}
-      rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-      className="group flex h-11 w-11 items-center justify-center rounded-full border border-[#17130F]/10 bg-white/70 transition-all duration-500 hover:-translate-y-1 hover:bg-[#17130F] hover:text-white"
-    >
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-        {children}
-      </svg>
-    </a>
+    <span className="text-sm font-semibold uppercase tracking-[0.35em] text-[#C8A45D]">
+      {children}
+    </span>
+  );
+}
+
+function Metric({ title, text }) {
+  return (
+    <div className="border-t border-[#0F172A]/10 pt-5">
+      <h3 className="heading-font text-4xl text-[#0F172A]">{title}</h3>
+      <p className="mt-2 text-sm text-[#475569]">{text}</p>
+    </div>
+  );
+}
+
+function CaseItem({ title, text }) {
+  return (
+    <div className="border-t border-[#0F172A]/10 pt-5">
+      <span className="text-xs font-semibold uppercase tracking-[0.22em] text-[#C8A45D]">
+        {title}
+      </span>
+      <p className="mt-4 text-sm leading-7 text-[#475569]">{text}</p>
+    </div>
   );
 }

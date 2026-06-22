@@ -1,8 +1,8 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Selçuk Koyuncu | Web Developer",
-  description: "Modern, hızlı ve profesyonel web siteleri.",
+  title: "Selçuk Koyuncu",
+  description: "Project Management & Web Development",
 };
 
 export default function RootLayout({ children }) {

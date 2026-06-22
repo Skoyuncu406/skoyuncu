@@ -2,109 +2,61 @@
 
 import { useEffect, useState } from "react";
 import { ChevronUp, ChevronDown } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 
 const sections = ["home", "about", "services", "projects", "process", "contact"];
 
 export default function ScrollButtons() {
-  const [scrollY, setScrollY] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const currentY = window.scrollY;
-      setScrollY(currentY);
-
-      let currentIndex = 0;
+    const onScroll = () => {
+      let current = 0;
 
       sections.forEach((id, index) => {
-        if (id === "home") {
-          if (currentY < 300) currentIndex = 0;
-          return;
-        }
-
-        const element = document.getElementById(id);
-
-        if (element && currentY >= element.offsetTop - 220) {
-          currentIndex = index;
+        const el = document.getElementById(id);
+        if (el && window.scrollY >= el.offsetTop - 180) {
+          current = index;
         }
       });
 
-      setActiveIndex(currentIndex);
+      setActiveIndex(current);
     };
 
-    handleScroll();
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
+    onScroll();
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const scrollToSection = (index) => {
+  const goTo = (index) => {
     const id = sections[index];
+    const el = document.getElementById(id);
 
-    if (id === "home") {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
-      return;
-    }
-
-    const element = document.getElementById(id);
-
-    if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
-
-  const goNextSection = () => {
-    const nextIndex = Math.min(activeIndex + 1, sections.length - 1);
-    scrollToSection(nextIndex);
-  };
-
-  const goPrevSection = () => {
-    const prevIndex = Math.max(activeIndex - 1, 0);
-    scrollToSection(prevIndex);
-  };
-
-  const isTop = scrollY < 100;
-  const isLast = activeIndex === sections.length - 1;
 
   return (
-    <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 0, x: 30 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{
-          duration: 0.6,
-          ease: [0.22, 1, 0.36, 1],
-        }}
-        className="fixed bottom-8 right-8 z-50 flex flex-col gap-3"
-      >
-        {!isTop && (
-          <button
-            onClick={goPrevSection}
-            aria-label="Önceki bölüme git"
-            className="flex h-12 w-12 items-center justify-center rounded-full border border-[#C9A86A]/30 bg-white/80 shadow-xl backdrop-blur-xl transition-all duration-500 hover:scale-105 hover:bg-white"
-          >
-            <ChevronUp size={20} />
-          </button>
-        )}
+    <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
+      {activeIndex > 0 && (
+        <button
+          onClick={() => goTo(activeIndex - 1)}
+          aria-label="Önceki bölüm"
+          className="flex h-12 w-12 items-center justify-center rounded-full border border-[#0F172A]/10 bg-white text-[#0F172A] shadow-lg transition hover:border-[#C8A45D] hover:text-[#C8A45D]"
+        >
+          <ChevronUp size={21} />
+        </button>
+      )}
 
-        {!isLast && (
-          <button
-            onClick={goNextSection}
-            aria-label="Sonraki bölüme git"
-            className="flex h-12 w-12 items-center justify-center rounded-full border border-[#C9A86A]/30 bg-white/80 shadow-xl backdrop-blur-xl transition-all duration-500 hover:scale-105 hover:bg-white"
-          >
-            <ChevronDown size={20} />
-          </button>
-        )}
-      </motion.div>
-    </AnimatePresence>
+      {activeIndex < sections.length - 1 && (
+        <button
+          onClick={() => goTo(activeIndex + 1)}
+          aria-label="Sonraki bölüm"
+          className="flex h-12 w-12 items-center justify-center rounded-full border border-[#0F172A]/10 bg-white text-[#0F172A] shadow-lg transition hover:border-[#C8A45D] hover:text-[#C8A45D]"
+        >
+          <ChevronDown size={21} />
+        </button>
+      )}
+    </div>
   );
 }

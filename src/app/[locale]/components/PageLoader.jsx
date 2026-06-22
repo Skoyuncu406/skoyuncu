@@ -1,56 +1,32 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 
 export default function PageLoader() {
-  const [loading, setLoading] = useState(true);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-
+    const timer = setTimeout(() => setVisible(false), 900);
     return () => clearTimeout(timer);
   }, []);
 
+  if (!visible) return null;
+
   return (
-    <AnimatePresence>
-      {loading && (
-        <motion.div
-          initial={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.8 }}
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#F4EDE3] px-6"
-        >
-          <div className="relative flex w-full max-w-[90%] flex-col items-center justify-center px-6 text-center">
-            <div className="absolute h-48 w-48 rounded-full bg-[#C9A86A]/20 blur-3xl" />
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#0F172A] px-6">
+      <div className="text-center">
+        <div className="mx-auto mb-6 h-[2px] w-28 overflow-hidden rounded-full bg-white/20">
+          <div className="h-full w-full animate-pulse bg-[#C8A45D]" />
+        </div>
 
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{
-                duration: 1.5,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-              className="relative h-24 w-24 rounded-full border-2 border-[#C9A86A]/25 border-t-[#8B5E1E]"
-            />
+        <h1 className="heading-font text-4xl text-white">
+          Selçuk Koyuncu
+        </h1>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="heading-font mt-10 text-center text-4xl text-[#17130F] sm:text-5xl"
-            >
-              Selçuk Koyuncu
-            </motion.h1>
-
-            <p className="mt-3 max-w-xs text-center text-xs tracking-[0.35em] text-[#8B5E1E] sm:max-w-none sm:tracking-[0.45em]">
-              PROJECT MANAGEMENT • WEB DEVELOPMENT
-            </p>
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+        <p className="mt-3 text-xs font-medium tracking-[0.35em] text-[#C8A45D]">
+          PROJECT MANAGEMENT - SOFTWARE DEVELOPTMENT
+        </p>
+      </div>
+    </div>
   );
 }
